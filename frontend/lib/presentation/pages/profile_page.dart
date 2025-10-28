@@ -133,7 +133,68 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: Color(0xFFF8FAFC),
       body: Column(
         children: [
-          GradientHeader(title: 'Quản lý người dùng'),
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF4F46E5), Color(0xFF7C3AED)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color(0xFF4F46E5).withOpacity(0.3),
+                  blurRadius: 20,
+                  offset: Offset(0, 10),
+                ),
+              ],
+            ),
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(24, 20, 24, 30),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(Icons.account_circle, color: Colors.white, size: 33),
+                    ),
+                    SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Thông tin cá nhân',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                          Text(
+                            'Quản lý thông tin tài khoản của bạn',
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.9),
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
           Expanded(
             child: BlocListener<ProfileBloc, ProfileState>(
               listener: (context, state) {
@@ -241,12 +302,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                 _buildInfoRow(Icons.person, 'Tên đăng nhập:', user.username),
                                 SizedBox(height: 15),
                                 _buildInfoRow(Icons.email, 'Email:', user.email),
-                                SizedBox(height: 15),
-                                _buildInfoRow(Icons.key, 'Vai trò:', 'Quản trị viên'),
                               ],
                             ),
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 80),
                           
                           // Edit form or edit button
                           if (isEditing) ...[
