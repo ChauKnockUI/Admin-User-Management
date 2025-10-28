@@ -13,7 +13,7 @@ async function ensureAdminExists() {
     await admin.save();
     console.log('Default admin created:', username);
   } else {
-    console.log('ℹAdmin already exists');
+    console.log('Admin already exists');
   }
 }
 
