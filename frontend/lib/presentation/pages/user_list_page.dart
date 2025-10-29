@@ -313,7 +313,7 @@ class _UserListPageState extends State<UserListPage> {
                     itemCount: state.users.length,
                     itemBuilder: (context, index) {
                       final user = state.users[index];
-                      return _buildUserCard(context, user);
+                      return _buildUserCardOutline(context, user);
                     },
                   );
                 }
@@ -350,215 +350,136 @@ class _UserListPageState extends State<UserListPage> {
     );
   }
   
-  Widget _buildUserCard(BuildContext context, UserEntity user) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            blurRadius: 15,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(20),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20),
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              AppRoutes.addUser,
-              arguments: user,
-            );
-          },
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
+  Widget _buildUserCardOutline(BuildContext context, UserEntity user) {
+  return Container(
+    margin: EdgeInsets.only(bottom: 16),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(20),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.06),
+          blurRadius: 15,
+          offset: Offset(0, 4),
+        ),
+      ],
+    ),
+    child: Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(20),
+      child: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Row(
               children: [
-                Row(
-                  children: [
-                    // Avatar with gradient border
-                    Container(
-                      padding: EdgeInsets.all(3),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          colors: [Color(0xFF4F46E5), Color(0xFF7C3AED)],
-                        ),
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                        child: _buildUserAvatar(user.image, user.username),
-                      ),
+                // Avatar with gradient border
+                Container(
+                  padding: EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [Color(0xFF4F46E5), Color(0xFF7C3AED)],
                     ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                    ),
+                    child: _buildUserAvatar(user.image, user.username),
+                  ),
+                ),
+                SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        user.username,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1F2937),
+                          letterSpacing: 0.2,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: 6),
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              Flexible(
-                                child: Text(
-                                  user.username,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF1F2937),
-                                    letterSpacing: 0.2,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              SizedBox(width: 6),
-                              
-                            ],
+                          Icon(
+                            Icons.email_outlined,
+                            size: 14,
+                            color: Color(0xFF9CA3AF),
                           ),
-                          SizedBox(height: 6),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.email_outlined,
-                                size: 14,
-                                color: Color(0xFF9CA3AF),
+                          SizedBox(width: 6),
+                          Flexible(
+                            child: Text(
+                              user.email,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xFF6B7280),
                               ),
-                              SizedBox(width: 6),
-                              Flexible(
-                                child: Text(
-                                  user.email,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Color(0xFF6B7280),
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 44,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xFFFBBF24), Color(0xFFF59E0B)],
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0xFFFBBF24).withOpacity(0.3),
-                              blurRadius: 8,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              AppRoutes.addUser,
-                              arguments: user,
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: EdgeInsets.symmetric(horizontal: 12),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.edit, color: Colors.white, size: 18),
-                              SizedBox(width: 6),
-                              Text(
-                                'Sửa',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 12),
-                    Expanded(
-                      child: Container(
-                        height: 44,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Color(0xFFEF4444), Color(0xFFDC2626)],
-                          ),
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0xFFEF4444).withOpacity(0.3),
-                              blurRadius: 8,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: ElevatedButton(
-                          onPressed: () => _showDeleteDialog(context, user),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            padding: EdgeInsets.symmetric(horizontal: 12),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.delete_outline, color: Colors.white, size: 18),
-                              SizedBox(width: 6),
-                              Text(
-                                'Xóa',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
-          ),
+            SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.addUser,
+                        arguments: user,
+                      );
+                    },
+                    icon: Icon(Icons.edit_outlined, size: 18),
+                    label: Text('Sửa'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Color(0xFF4F46E5),
+                      side: BorderSide(color: Color(0xFF4F46E5).withOpacity(0.3)),
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () => _showDeleteDialog(context, user),
+                    icon: Icon(Icons.delete_outline, size: 18),
+                    label: Text('Xóa'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Color(0xFFEF4444),
+                      side: BorderSide(color: Color(0xFFEF4444).withOpacity(0.3)),
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
-    );
-  }
-  
+    ),
+  );
+}
   void _showDeleteDialog(BuildContext context, UserEntity user) {
     showDialog(
       context: context,
