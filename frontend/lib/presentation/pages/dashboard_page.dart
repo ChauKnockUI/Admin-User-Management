@@ -135,7 +135,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 bgColor: Color(0xFFEEF2FF),
                               ),
                             ),
-
+                            SizedBox(width: 10),
                             Expanded(
                               child: _buildStatCard(
                                 icon: Icons.email,
