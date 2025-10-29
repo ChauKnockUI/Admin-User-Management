@@ -28,7 +28,7 @@ class BottomNav extends StatelessWidget {
               _buildNavItem(context, 0, '📊', 'Tổng quan', AppRoutes.dashboard),
               _buildNavItem(context, 1, '➕', 'Thêm mới', AppRoutes.addUser),
               _buildNavItem(context, 2, '📋', 'Danh sách', AppRoutes.list),
-              _buildNavItem(context, 3, '👤', 'Profile', AppRoutes.profile),
+              _buildNavItem(context, 3, '👤', 'Tôi', AppRoutes.profile),
             ],
           ),
         ),

@@ -360,7 +360,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   // Password field
                                   Row(
                                     children: [
-                                      Icon(Icons.lock, color: Color(0xFFFF9800)),
+                                      Icon(Icons.lock, color: Color(0xFF4F46E5)),
                                       SizedBox(width: 8),
                                       Text('Mật khẩu mới', style: TextStyle(fontWeight: FontWeight.w600)),
                                     ],
@@ -371,7 +371,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   // Image upload
                                   Row(
                                     children: [
-                                      Icon(Icons.camera_alt, color: Color(0xFF374151)),
+                                      Icon(Icons.camera_alt, color: Color(0xFF4F46E5)),
                                       SizedBox(width: 8),
                                       Text('Ảnh đại diện', style: TextStyle(fontWeight: FontWeight.w600)),
                                     ],
